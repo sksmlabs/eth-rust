@@ -164,12 +164,12 @@ pub async fn transfer_eth<M: Middleware + 'static>(
     println!("✅ Sufficient ETH for transfer and gas.");
 
     // Uncomment to actually not send the transaction
-    println!("🚀 Ready to send transaction (commented out for safety)");
+    // println!("🚀 Ready to send transaction (commented out for safety)");
     
     // Uncomment to actually send the transaction
-    // let pending_tx = client.send_transaction(typed_tx, None).await?;
-    // let receipt = pending_tx.await?.expect("Transaction failed");
-    // println!("✅ Transfer complete: {:?}", receipt.transaction_hash);
+    let pending_tx = client.send_transaction(typed_tx, None).await?;
+    let receipt = pending_tx.await?.expect("Transaction failed");
+    println!("✅ Transfer complete: {:?}", receipt.transaction_hash);
     
     Ok(())
 }

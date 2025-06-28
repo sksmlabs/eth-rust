@@ -20,7 +20,7 @@ use std::sync::Arc;
 
 // modules
 use constants::{ACCOUNT_PRIVATE_KEY, RECIPIENT_ADDRESS};
-use chains::{CHAIN_ETHEREUM};
+use chains::{CHAIN_SEPOLIA};
 use account::token_balances::get_token_balances;
 use account::token_transfer::transfer_eth;
 use chainlink::price::PriceFeed;
@@ -40,7 +40,7 @@ async fn main() -> Result<()> {
     }
 
     // Chain to use
-    let CHAIN = CHAIN_ETHEREUM;
+    let CHAIN = CHAIN_SEPOLIA;
     
     // Connect to Ethereum provider
     let provider = Arc::new(Provider::<Http>::try_from(CHAIN.rpc_url)?);
@@ -90,7 +90,7 @@ async fn main() -> Result<()> {
 
     // List of token symbols to check
     if args.contains(&"account_balances".to_string()) {
-        let symbols = ["ETH",];
+        let symbols = ["ETH"];
         let balances = get_token_balances(provider.clone(), address, &symbols).await?;
         for (symbol, balance) in balances {
             println!("\n");
